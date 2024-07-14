@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String
+  teacher Teacher? // User to Teacher
+  student Student? // User to Student
+  parent Parent? // User to Parent
+  @@map("Users")
+}
+
+model Teacher {
+  id Int @id @default(autoincrement())
+  userId Int @unique
+  classroom String
+  details String
+  testing String
+  style String
+  parents Parent[]
+  students Student[]
+  teacherToStudents teacherToStudents[]
+  parentsToTeacher parentsToTeacher[]
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  @@map("Teachers")
+}
+
+model Parent {
+  id Int @id @default(autoincrement())
+  userId Int @unique
+  contact String
+  car String
+  pickup String
+  parentsToStudents parentsToStudents[]
+  parentsToTeacher parentsToTeacher[]
+  teachers Teacher[]
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  @@map("Parents")
+}
+
+model Student {
+  id Int @id @default(autoincrement())
+  userId Int @unique
+  teacherId Int @unique
+  name String
+  grade String
+  classroom String
+  teacherToStudents teacherToStudents[]
+  parentsToStudents parentsToStudents[]
+  teacher Teacher @relation(fields: [teacherId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  @@map("Students")
+}
+
+model teacherToStudents {
+  id Int @id @default(autoincrement())
+  studentId Int @unique
+  teacherId Int @unique
+  teachers Teacher @relation(fields: [teacherId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  students Student @relation(fields: [studentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model parentsToStudents {
+  id Int @id @default(autoincrement())
+  parentId Int @unique
+  studentId Int @unique
+  parents Parent @relation(fields: [parentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  students Student @relation(fields: [studentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model parentsToTeacher {
+  id Int @id @default(autoincrement())
+  parentId Int @unique
+  teacherId Int @unique
+  parents Parent @relation(fields: [parentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  teachers Teacher @relation(fields: [teacherId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+
+model Assignments {
+  id Int @id @default(autoincrement())
+  name String
+  details String?
+  link String?
+  studentId Int
+  parentId Int
+  @@map("Assignments")
+}
+
+model Resources {
+  id Int @id @default(autoincrement())
+  name String
+  details String?
+  link String?
+  studentId Int
+  parentId Int
+  @@map("Resources")
+}
+
+model Grades {
+  id Int @id @default(autoincrement())
+  grade String
+  points Int
+  notes String?
+  studentId Int
+  parentId Int
+  teacherId Int
+  @@map("Grades")
+}
+
+model SpellingWords {
+  id Int @id @default(autoincrement())
+  word String
+  level String
+  notes String?
+  studentId Int
+  parentId Int
+  teacherId Int
+  @@map("SpellingWords")
+}
+
+model Behavior {
+  id Int @id @default(autoincrement())
+  level String
+  issue String
+  details String?
+  studentId Int
+  parentId Int
+  teacherId Int
+  @@map("Behavior")
+}
