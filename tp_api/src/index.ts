@@ -6,6 +6,7 @@ import helmet from "helmet";
 import userRouter from "./routes/user.routes";
 import parentRouter from "./routes/parent.routes";
 import teacherRouter from "./routes/teacher.routes";
+import studentRouter from "./routes/student.routes";
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use('/user', userRouter)
 app.use('/parent', parentRouter)
 app.use('/teacher', teacherRouter)
+app.use('/student', studentRouter)
 
 async function main() {
     // write client queries here
