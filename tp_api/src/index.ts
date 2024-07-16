@@ -5,6 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 import userRouter from "./routes/user.routes";
 import parentRouter from "./routes/parent.routes";
+import teacherRouter from "./routes/teacher.routes";
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/user', userRouter)
 app.use('/parent', parentRouter)
+app.use('/teacher', teacherRouter)
 
 async function main() {
     // write client queries here

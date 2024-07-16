@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 
 const prisma = new PrismaClient()
 
-const createParent = async (req: Request, res: Response) => {
+const createTeacher = async (req: Request, res: Response) => {
     try {
-        const result = await prisma.parent.create({
+        const result = await prisma.teacher.create({
             data: { ...req.body }
         })
         res.status(200).json(result)
@@ -14,56 +14,56 @@ const createParent = async (req: Request, res: Response) => {
     }
 }
 
-const updateParent = async (req: Request, res: Response) => {
+const updateTeacher = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const parent = await prisma.parent.update({
+        const teacher = await prisma.teacher.update({
             where: { id: Number(id) },
             data: { ...req.body }
         })
-        res.status(200).json(parent)
+        res.status(200).json(teacher)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-const getAllParents = async (req: Request, res: Response) => {
+const getAllTeachers = async (req: Request, res: Response) => {
     try {
-        const parent = await prisma.parent.findMany()
-        res.status(200).json(parent)
+        const teacher = await prisma.teacher.findMany()
+        res.status(200).json(teacher)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-const getParent = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params
-        const parent = await prisma.parent.findFirst({
-            where: { id: Number(id) }
-        })
-        res.status(200).json(parent)
-    } catch (error) {
-        res.status(500).send(error)
-    }
-}
-
-const deleteParent = async (req: Request, res: Response) => {
+const getTeacher = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const parent = await prisma.parent.delete({
+        const teacher = await prisma.teacher.findFirst({
             where: { id: Number(id) }
         })
-        res.status(200).json(parent)
+        res.status(200).json(teacher)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+const deleteTeacher = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        const teacher = await prisma.teacher.delete({
+            where: { id: Number(id) }
+        })
+        res.status(200).json(teacher)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
 export default {
-    createParent,
-    updateParent,
-    getAllParents,
-    getParent,
-    deleteParent
+    createTeacher,
+    updateTeacher,
+    getAllTeachers,
+    getTeacher,
+    deleteTeacher
 }
