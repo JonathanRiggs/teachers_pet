@@ -7,6 +7,7 @@ import userRouter from "./routes/user.routes";
 import parentRouter from "./routes/parent.routes";
 import teacherRouter from "./routes/teacher.routes";
 import studentRouter from "./routes/student.routes";
+import assignmentRouter from "./routes/assignment.routes";
 
 dotenv.config()
 
@@ -24,6 +25,9 @@ app.use('/user', userRouter)
 app.use('/parent', parentRouter)
 app.use('/teacher', teacherRouter)
 app.use('/student', studentRouter)
+
+// Data Config
+app.use('/assignment', assignmentRouter)
 
 async function main() {
     // write client queries here

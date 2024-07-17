@@ -7,7 +7,7 @@ const parentRouter = express.Router()
 
 parentRouter.post('/create', ParentController.createParent)
 parentRouter.put('/update/:id', ParentController.updateParent)
-parentRouter.get('/get_all_parents', ParentController.getAllParents)
+parentRouter.get('/get_all', ParentController.getAllParents)
 parentRouter.get('/get/:id', ParentController.getParent)
 parentRouter.delete('/delete/:id', ParentController.deleteParent)
 

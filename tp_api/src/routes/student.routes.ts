@@ -7,7 +7,7 @@ const studentRouter = express.Router()
 
 studentRouter.post('/create', StudentController.createStudent)
 studentRouter.put('/update/:id', StudentController.updateStudent)
-studentRouter.get('/get_all_students', StudentController.getAllStudents)
+studentRouter.get('/get_all', StudentController.getAllStudents)
 studentRouter.get('/get/:id', StudentController.getStudent)
 studentRouter.delete('/delete', StudentController.deleteStudent)
 
