@@ -11,6 +11,7 @@ import assignmentRouter from "./routes/assignment.routes";
 import resourceRouter from "./routes/resources.routes";
 import gradeRouter from "./routes/grades.routes";
 import spellingWordRouter from "./routes/spellingwrd.routes";
+import behaviorRouter from "./routes/behavior.routes";
 
 dotenv.config()
 
@@ -33,6 +34,7 @@ app.use('/assignment', assignmentRouter)
 app.use('/spelling-word', spellingWordRouter)
 app.use('/grade', gradeRouter)
 app.use('/resource', resourceRouter)
+app.use('/behavior', behaviorRouter)
 
 async function main() {
     // write client queries here
