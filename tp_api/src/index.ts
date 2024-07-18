@@ -10,6 +10,7 @@ import studentRouter from "./routes/student.routes";
 import assignmentRouter from "./routes/assignment.routes";
 import resourceRouter from "./routes/resources.routes";
 import gradeRouter from "./routes/grades.routes";
+import spellingWordRouter from "./routes/spellingwrd.routes";
 
 dotenv.config()
 
@@ -27,11 +28,11 @@ app.use('/user', userRouter)
 app.use('/parent', parentRouter)
 app.use('/teacher', teacherRouter)
 app.use('/student', studentRouter)
-app.use('/resource', resourceRouter)
-app.use('/grade', gradeRouter)
-
 // Data Config
 app.use('/assignment', assignmentRouter)
+app.use('/spelling-word', spellingWordRouter)
+app.use('/grade', gradeRouter)
+app.use('/resource', resourceRouter)
 
 async function main() {
     // write client queries here
