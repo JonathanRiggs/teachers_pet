@@ -1,12 +1,11 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 
-
 const prisma = new PrismaClient()
 
-const createUser = async (req: Request, res: Response) => {
+const createGrade = async (req: Request, res: Response) => {
     try {
-        const result = await prisma.user.create({
+        const result = await prisma.grades.create({
             data: { ...req.body }
         })
         res.status(200).json(result)
@@ -15,56 +14,56 @@ const createUser = async (req: Request, res: Response) => {
     }
 }
 
-const updateUser = async (req: Request, res: Response) => {
+const updateGrade = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const user = await prisma.user.update({
+        const grade = await prisma.grades.update({
             where: { id: Number(id) },
             data: { ...req.body }
         })
-        res.status(200).json(user)
+        res.status(200).json(grade)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-const getAllUsers = async (req: Request, res: Response) => {
+const getAllGrade = async (req: Request, res: Response) => {
     try {
-        const user = await prisma.user.findMany()
-        res.status(200).json(user)
+        const grade = await prisma.grades.findMany()
+        res.status(200).json(grade)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-const getUser = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params
-        const user = await prisma.user.findFirst({
-            where: { id: Number(id) },
-        })
-        res.status(200).json(user)
-    } catch (error) {
-        res.status(500).send(error)
-    }
-}
-
-const deleteUser = async (req: Request, res: Response) => {
+const getGrade = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
-        const user = await prisma.user.delete({
+        const grade = await prisma.grades.findFirst({
             where: { id: Number(id) }
         })
-        res.status(200).json(user)
+        res.status(200).json(grade)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+const deleteGrade = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        const grade = await prisma.grades.delete({
+            where: { id: Number(id) }
+        })
+        res.status(200).json(grade)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
 export default {
-    createUser,
-    updateUser,
-    getAllUsers,
-    getUser,
-    deleteUser
+    createGrade,
+    updateGrade,
+    getAllGrade,
+    getGrade,
+    deleteGrade
 }

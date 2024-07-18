@@ -9,6 +9,7 @@ import teacherRouter from "./routes/teacher.routes";
 import studentRouter from "./routes/student.routes";
 import assignmentRouter from "./routes/assignment.routes";
 import resourceRouter from "./routes/resources.routes";
+import gradeRouter from "./routes/grades.routes";
 
 dotenv.config()
 
@@ -27,6 +28,7 @@ app.use('/parent', parentRouter)
 app.use('/teacher', teacherRouter)
 app.use('/student', studentRouter)
 app.use('/resource', resourceRouter)
+app.use('/grade', gradeRouter)
 
 // Data Config
 app.use('/assignment', assignmentRouter)
